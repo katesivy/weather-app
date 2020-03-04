@@ -1,14 +1,14 @@
+function getWeather(zip) {
+    // var key = '{97c1709133fbc864e7d9571b665abe73}';
+    fetch('https://api.openweathermap.org/data/2.5/weather?zip=40502,&appid=97c1709133fbc864e7d9571b665abe73')
+        .then(function (resp) { return resp.json() })
+        .then(function (data) {
+            console.log(data);
+        })
+        .catch(function () {
+        });
+}
 
-button.addEventListener('click', function);
-
-
-// let requestURL =
-// let request = new XMLHttpRequest();
-// request.open('GET', requestURL);
-// request.responseType = 'json';
-// request.send();
-/*request.onload = function() {
-    const varName = request.response;
-    populateHeader(varName);
-    showHeroes(varName);
-  }*/
+window.onload = function () {
+    getWeather(40502);
+}
