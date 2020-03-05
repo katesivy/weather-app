@@ -45,3 +45,31 @@ function Icon() {
                 if (isNaN(zip) || zip.length != 5) {
                     document.getElementById("alert").innerHTML = text;
                 } 
+
+// const zipButton = document.getElementById('zip');
+
+// function enterKey() {
+//     if (event.keycode === 13) {
+//         document.getElementById('zip').click();
+//     }
+// }
+// zipButton.addEventListener('keydown', getWeather);
+
+// function temperature() {
+//     switch (state) {
+        //    case 0:
+        //        temperature = farenheit[state];
+//             break;
+//         case 1:
+//             button1.style.display = "block";
+//             button2.style.display = "block";
+
+//             smallBText = smallButton[state];
+//             break;
+//     }
+//     secondText.innerHTML = btext;
+//     thirdText.innerHTML = smallText;
+//     fourthText.innerHTML = smallBText;
+// }
+// button1.addEventListener('click', nextPage);
+// button2.addEventListener('click', previousPage);

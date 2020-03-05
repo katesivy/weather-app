@@ -1,7 +1,8 @@
 var zip = document.getElementById("zip");
 const button = document.getElementById('submit');
 
-function getWeather() {
+function getWeather(e) {
+    e.preventDefault();
     fetch("https://api.openweathermap.org/data/2.5/weather?zip=" + zip.value + "&appid=97c1709133fbc864e7d9571b665abe73")
         .then(function (resp) { return resp.json() })
         .then(function (data) {
@@ -9,21 +10,18 @@ function getWeather() {
             Populate(data);
         })
 
-        .catch(e)
+        .catch(e);
 }
-
 button.addEventListener('click', getWeather);
-var content = document.getElementById('content');
 
-var errorMsg = document.getElementById("error");
+var content = document.getElementById('content');
 var modal = document.getElementById("myModal");
-// var modalButton = document.getElementById("modalButton")
+var modalButton = document.getElementById("modalButton");
 modalButton.style.display = "none";
 content.style.display = "none";
 
 function Populate(d) {
     if (d.cod == 200) {
-        // errorMsg.style.display = "none";
        content.style.display = "block";
        
         document.getElementById('location').innerHTML = d.name;
@@ -39,30 +37,10 @@ function Populate(d) {
 
         document.getElementById('display').setAttribute("src", "http://openweathermap.org/img/wn/" + d.weather[0].icon + "@2x.png");
     } else {
-        errorMsg.style.display = "block";
         content.style.display = "none";
         $("#myModal").modal('show');
-        document.getElementById("error").innerHTML = ("NOT A VALID ZIP CODE. " + d.message);
+        document.getElementById("error").innerHTML = ("NOT A VALID ZIP CODE; " + d.message);
         
 
     }
 }
-
-// function temperature() {
-//     switch (state) {
-        //    case 0:
-        //        temperature = farenheit[state];
-//             break;
-//         case 1:
-//             button1.style.display = "block";
-//             button2.style.display = "block";
-
-//             smallBText = smallButton[state];
-//             break;
-//     }
-//     secondText.innerHTML = btext;
-//     thirdText.innerHTML = smallText;
-//     fourthText.innerHTML = smallBText;
-// }
-// button1.addEventListener('click', nextPage);
-// button2.addEventListener('click', previousPage);
