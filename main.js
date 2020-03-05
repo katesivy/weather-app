@@ -1,6 +1,5 @@
 var zip = document.getElementById("zip");
 const button = document.getElementById('submit');
-// const errorMsg = document.getElementById('error2');
 
 function getWeather() {
     fetch("https://api.openweathermap.org/data/2.5/weather?zip=" + zip.value + "&appid=97c1709133fbc864e7d9571b665abe73")
@@ -9,35 +8,61 @@ function getWeather() {
             console.log(data);
             Populate(data);
         })
-        
-        .catch(e) 
-        
-       
+
+        .catch(e)
 }
 
-
-
-
 button.addEventListener('click', getWeather);
+var content = document.getElementById('content');
+
+var errorMsg = document.getElementById("error");
+var modal = document.getElementById("myModal");
+// var modalButton = document.getElementById("modalButton")
+modalButton.style.display = "none";
+content.style.display = "none";
 
 function Populate(d) {
     if (d.cod == 200) {
-    
-    document.getElementById('location').innerHTML = d.name;
-    let farenheit = Math.round((d.main.temp * (9 / 5) - 459.67));
-    let celcius = Math.round(d.main.temp - 273.15);
-    document.getElementById('today').innerHTML = d.main.temp + " K°";
-    document.getElementById('farenheit').innerHTML = farenheit + " F°";
-    document.getElementById('celcius').innerHTML = celcius + " C°";
-    document.getElementById('condition').innerHTML = d.weather[0].main;
-    let feelsFaranheit = Math.round((d.main.feels_like * (9 / 5) - 459.67));
-    document.getElementById('feels').innerHTML = feelsFaranheit;
+        // errorMsg.style.display = "none";
+       content.style.display = "block";
+       
+        document.getElementById('location').innerHTML = d.name;
+        let farenheit = Math.round((d.main.temp * (9 / 5) - 459.67));
+        let celcius = Math.round(d.main.temp - 273.15);
+        // document.getElementById('today').innerHTML = d.main.temp + " K°";
+        document.getElementById('farenheit').innerHTML = farenheit + " F°";
+        document.getElementById('celcius').innerHTML = celcius + " C°";
+        document.getElementById('condition').innerHTML = d.weather[0].main;
 
-    document.getElementById('display').setAttribute("src", "http://openweathermap.org/img/wn/" + d.weather[0].icon + "@2x.png");
-} else {
-    alert("NOT A VALID ZIP CODE. " + d.message);
+        let feelsFaranheit = Math.round((d.main.feels_like * (9 / 5) - 459.67));
+        document.getElementById('feels').innerHTML = feelsFaranheit + "°";
 
+        document.getElementById('display').setAttribute("src", "http://openweathermap.org/img/wn/" + d.weather[0].icon + "@2x.png");
+    } else {
+        errorMsg.style.display = "block";
+        content.style.display = "none";
+        $("#myModal").modal('show');
+        document.getElementById("error").innerHTML = ("NOT A VALID ZIP CODE. " + d.message);
+        
+
+    }
 }
-}
 
+// function temperature() {
+//     switch (state) {
+        //    case 0:
+        //        temperature = farenheit[state];
+//             break;
+//         case 1:
+//             button1.style.display = "block";
+//             button2.style.display = "block";
 
+//             smallBText = smallButton[state];
+//             break;
+//     }
+//     secondText.innerHTML = btext;
+//     thirdText.innerHTML = smallText;
+//     fourthText.innerHTML = smallBText;
+// }
+// button1.addEventListener('click', nextPage);
+// button2.addEventListener('click', previousPage);
