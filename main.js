@@ -1,5 +1,14 @@
 var zip = document.getElementById("zip");
 const button = document.getElementById('submit');
+const zipInput = document.getElementById('zip');
+
+
+function enterKey(event) {
+    if (event.keyCode === 13) {
+        document.getElementById('submit').click();
+    }
+}
+
 
 function getWeather(e) {
     e.preventDefault();
@@ -12,6 +21,7 @@ function getWeather(e) {
 
         .catch(e);
 }
+zipInput.addEventListener('keydown', enterKey);
 button.addEventListener('click', getWeather);
 
 var content = document.getElementById('content');
